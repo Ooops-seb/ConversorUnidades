@@ -139,7 +139,7 @@ public class Volumen extends javax.swing.JFrame {
         pnl_result.add(jLabel5);
         jLabel5.setBounds(80, 10, 100, 28);
 
-        lbl_ValorConvertido.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
+        lbl_ValorConvertido.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         lbl_ValorConvertido.setForeground(new java.awt.Color(51, 204, 0));
         lbl_ValorConvertido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_ValorConvertido.setText("DATO");
@@ -260,7 +260,7 @@ public class Volumen extends javax.swing.JFrame {
             conversor.convertirUnidades(valor);
 
             lbl_valorAConvertir.setText(Double.toString(conversor.valorOrigen));
-            lbl_ValorConvertido.setText(Double.toString(conversor.valorFinal));
+            lbl_ValorConvertido.setText(Double.toString(Math.round(conversor.valorFinal)));
 
             lbl_EquivalenciaOrigen.setText(conversor.unidadOrigen);
             lbl_EquivalenciaDestino.setText(conversor.unidadFinal);

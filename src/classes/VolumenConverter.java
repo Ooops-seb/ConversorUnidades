@@ -13,6 +13,9 @@ public class VolumenConverter {
     public static String[] Unidades = {
         "Kilometro cubico",
         "Metro cubico",
+        "Galon Estadounidense",
+        "Litro",
+        "Mililitro",
         "Centimetro cubico",
     };
     
@@ -46,33 +49,39 @@ public class VolumenConverter {
                     case "DOWN":
                         switch (i) {
                             case 0:
-                                aux_valor = kmToH(aux_valor);
+                                aux_valor = kmToM(aux_valor);
                                 break;
                             case 1:
-                                aux_valor = hToA(aux_valor);
+                                aux_valor = mToG(aux_valor);
                                 break;
                             case 2:
-                                aux_valor = aToM(aux_valor);
+                                aux_valor = gToL(aux_valor);
                                 break;
                             case 3:
-                                aux_valor = mToCm(aux_valor);
+                                aux_valor = lToMi(aux_valor);
+                                break;
+                            case 4:
+                                aux_valor = miToCm(aux_valor);
                                 break;
                         }
                         i++;
                         break;
                     case "UP":
                         switch (i-1) {
-                            case 0: 
-                                aux_valor = hToKm(aux_valor);
+                            case 0:
+                                aux_valor = mToKm(aux_valor);
                                 break;
                             case 1:
-                                aux_valor = aToH(aux_valor);
+                                aux_valor = gToM(aux_valor);
                                 break;
                             case 2:
-                                aux_valor = mToA(aux_valor);
+                                aux_valor = lToG(aux_valor);
                                 break;
                             case 3:
-                                aux_valor = cmToM(aux_valor);
+                                aux_valor = miToL(aux_valor);
+                                break;
+                            case 4:
+                                aux_valor = cmToMi(aux_valor);
                                 break;
                         }
                         i--;
@@ -104,10 +113,48 @@ public class VolumenConverter {
         }
     }
     
-    public static double 
+    public static double cmToMi (double valor){
+        return valor;
+    }
+    
+    public static double miToL (double valor){
+        return valor / 1000;
+    }
+    
+    public static double lToG (double valor){
+        return valor / 3.78541178;
+    }
+    
+    public static double gToM (double valor){
+        return valor / 264.172053;
+    }
+    
+    public static double mToKm (double valor){
+        return valor / 1000000000;
+    }
+    
+    public static double miToCm (double valor){
+        return valor;
+    }
+    
+    public static double lToMi (double valor){
+        return valor * 1000;
+    }
+    
+    public static double gToL (double valor){
+        return valor * 3.78541178;
+    }
+    
+    public static double mToG (double valor){
+        return valor * 264.172053;
+    }
+    
+    public static double kmToM (double valor){
+        return valor * 1000000000;
+    }
     
     public static void main(String[] args){
-        VolumenConverter obj = new VolumenConverter(Unidades[2], Unidades[0]);
+        VolumenConverter obj = new VolumenConverter(Unidades[1], Unidades[4]);
         obj.convertirUnidades(30);
         System.out.println(obj.unidadOrigen + " en " + obj.indexOrigen + " = " + valorOrigen);
         System.out.println(obj.unidadFinal + " en " + obj.indexFinal + " = " + valorFinal);
