@@ -249,7 +249,7 @@ public class Longitud extends javax.swing.JFrame {
 
     private void btn_convertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_convertirActionPerformed
         try {
-            if(txt_ValorAConvertir.getText().isEmpty()){
+            if(txt_ValorAConvertir.getText().isEmpty() || cBox_UnidadOrigen.getSelectedItem().equals("") || cBox_UnidadDestino.getSelectedItem().equals("")){
                 throw new IllegalArgumentException("El campo está vacío");
             }
             double valor =  Double.parseDouble(txt_ValorAConvertir.getText());

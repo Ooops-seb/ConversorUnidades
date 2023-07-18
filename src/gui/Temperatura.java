@@ -4,6 +4,9 @@
  */
 package gui;
 
+import classes.TemperaturaConverter;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author seb_3
@@ -18,6 +21,14 @@ public class Temperatura extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         String titulo = this.getClass().getSimpleName();
         lbl_title.setText(titulo);
+        cBox_UnidadOrigen.addItem("");
+        for(String elemento : TemperaturaConverter.Unidades){
+            cBox_UnidadOrigen.addItem(elemento);
+        }
+        cBox_UnidadDestino.addItem("");
+        for(String elemento : TemperaturaConverter.Unidades){
+            cBox_UnidadDestino.addItem(elemento);
+        }
     }
 
     /**
@@ -237,7 +248,30 @@ public class Temperatura extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_limpiarActionPerformed
 
     private void btn_convertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_convertirActionPerformed
-        pnl_result.show();
+        try {
+            if(txt_ValorAConvertir.getText().isEmpty() || cBox_UnidadOrigen.getSelectedItem().equals("") || cBox_UnidadDestino.getSelectedItem().equals("")){
+                throw new IllegalArgumentException("El campo está vacío");
+            }
+            double valor =  Double.parseDouble(txt_ValorAConvertir.getText());
+            String unidadOrigen = cBox_UnidadOrigen.getSelectedItem().toString();
+            String unidadFinal = cBox_UnidadDestino.getSelectedItem().toString();
+            TemperaturaConverter conversor = new TemperaturaConverter(unidadOrigen, unidadFinal);
+
+            conversor.convertirUnidades(valor);
+
+            lbl_valorAConvertir.setText(Double.toString(conversor.valorOrigen));
+            lbl_ValorConvertido.setText(Double.toString(conversor.valorFinal));
+
+            lbl_EquivalenciaOrigen.setText(conversor.unidadOrigen);
+            lbl_EquivalenciaDestino.setText(conversor.unidadFinal);
+
+            pnl_result.show();
+        }        
+        catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Formato de número inválido: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalArgumentException | ArithmeticException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btn_convertirActionPerformed
 
     /**
